@@ -1,12 +1,12 @@
-#Sistema de Monitoramento
+# Sistema de Monitoramento
 
 Sistema simples de monitoramento desenvolvido em C.
 
-#Sobre
+## Sobre
 
 O projeto tem como objetivo monitorar informações do sistema e apresentar os resultados no terminal.
 
-#Tecnologias
+## Tecnologias
 
 C
 
@@ -14,21 +14,21 @@ GCC
 
 Linux
 
-#Compilação
+## Compilação
 
 Para compilar o projeto:
 
 gcc main.c -o monitoramento
 
-#Execução
+## Execução
 ./monitoramento
 
-#Estrutura
+# Estrutura
 .
 ├── main.c
 └── README.md
 
-#Funcionalidades
+## Funcionalidades
 
 Monitoramento de informações.
 
@@ -36,12 +36,12 @@ Exibição dos dados no terminal.
 
 Atualização periódica dos valores.
 
-#Requisitos
+## Requisitos
 
 GCC instalado.
 
 Sistema operacional Linux ou compatível.
 
-#Autor
+## Autor
 
 Projeto desenvolvido para fins de estudo e monitoramento utilizando a linguagem C.
