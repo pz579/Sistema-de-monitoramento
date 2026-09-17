@@ -1,0 +1,35 @@
+1.INTRODUÇÃO
+O presente projeto apresenta a descrição do desenvolvimento do Sistema de Monitoramento de Ocupação e Desempenho de Laboratórios. No cenário atual, os laboratórios representam recursos fundamentais para a realização das aulas práticas dos estudantes do curso de Ciência de Dados e Inteligência Artificial. Porém, gerenciar o fluxo de ocupação desses espaços torna-se uma tarefa difícil sem a utilização de um programa que realize o levantamento simplificado de dados, gerando indicadores que auxiliem na identificação de horários de maior ocupação, laboratórios subutilizados e situações que necessitam de atenção.  
+
+Portanto, como solução, o projeto propõe a criação de um programa desenvolvido em linguagem C. Dessa forma, o sistema foi projetado para processar dados de utilização de até 20 laboratórios ao longo de, no máximo, 30 dias de acompanhamento. A partir disso, o usuário cadastra as informações necessárias para que o software calcule métricas para a análise sobre ocupação.  
+
+Logo, o programa desenvolvido atua como uma ferramenta de apoio à decisão institucional, fornecendo dados precisos que auxiliam a coordenação na tomada de decisões e na identificação de melhorias.
+
+
+2.OBJETIVO
+Objetivo Geral: Desenvolvimento de um programa, em linguagem C, para realizar o levantamento simplificado da ocupação dos laboratórios e do desempenho dos estudantes nas atividades práticas.  
+
+
+Objetivos Específicos:  
+
+- Permitir o cadastro de informações válidas no momento de cadastramento. 
+
+- Exibir a tabela de ocupação de todos os laboratórios ao longo dos dias. 
+
+- Calcular indicadores essenciais para análise final, como: total diário de ocupação, média diária de ocupação, maior e menor ocupação entre outros. 
+
+- Identificar e exibir o laboratório com maior ocupação em um dia fornecido pelo usuário. 
+
+- Classificar os laboratórios com base em duas informações simultaneamente 
+
+- Disponibilizar dois tipos de relatório, à escolha do usuário:  
+
+    Relatório de um laboratório: contendo todas as informações sobre um laboratório específico 
+
+    Relatório final: contendo todas as informações de todos os laboratórios. 
+
+
+3.DESENVOLVIMENTO
+4.CRONOGRAMA PLANEJADO E EXECUTADO
+5.CONCLUSÃO
+REFERÊNCIAS 
