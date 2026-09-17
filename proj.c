@@ -5,7 +5,6 @@ int main (void)
 {
     char *l[];
     int cap[];
-    aaaa
     char *dias[];
 
     int qtdL;
