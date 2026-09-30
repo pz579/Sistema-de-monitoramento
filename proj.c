@@ -7,6 +7,11 @@
 #define max_dias 30
 
 //Perguntas: pode manter a media de alunos arredondada?
+void limpar_buffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
 
 int main(){
 
@@ -62,14 +67,14 @@ int main(){
         printf("\n0 - Encerrar Programa");
         printf("\n\t");
         printf("\nQual opção deseja selecionar?: ");
-        scanf("%d", &funcionalidade);
 
-        if(funcionalidade < 0){
-            printf("\nERRO");
-            printf("\nOpção inválida. Tente selecionar uma funcionalidade novamente.\n");
-            system("pause");
-            continue;
+        while (scanf("%d", &funcionalidade) != 1)
+        {
+            limpar_buffer();
+            printf("\nErro, somente números são permitidos.");
+            printf("\nQual opção deseja selecionar?: ");
         }
+
 
         if(funcionalidade >= 2 && funcionalidade <= 5){
             if(dados_cadastrados == 0){
