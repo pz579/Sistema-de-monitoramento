@@ -6,11 +6,7 @@
 #define max_lab 20
 #define max_dias 30
 
-void limpar_buffer() {
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
-}
-
+//Perguntas: pode manter a media de alunos arredondada?
 
 int main(){
 
@@ -21,22 +17,20 @@ int main(){
     int capacidade_labs[max_lab];
     float desempenho_labs[max_lab][max_dias];
     int dias;
-    int dados_cadastrados = 0;
+    int dados_cadastrados = 0;  //Funciona como variável bool
     int i, j;
     int total_diario[max_dias];
     int maior_movimentacao = -1;
     int soma_ocupacao_lab[max_lab];
-    float soma_desempenho_lab[max_lab];
     int maior_ocupacao_dia = -1;
     int menor_ocupacao_dia = 99999999;
     float taxa_media_diaria[max_lab];
     float media_ocupacao[max_lab];
-    float media_desempenho[max_lab];
     int dia_maior_individual[max_lab];
     int dia_menor_individual[max_lab];
     int maior_ocupacao_individual[max_lab];
     int menor_ocupacao_individual[max_lab];
-    int calculo_indicadores = 0;
+    int calculo_indicadores = 0; //Funciona como variável bool
     int consulta_dia;
     int lab_mais_ocupado = 0;
     int maior_ocupacao_lab;
@@ -68,15 +62,14 @@ int main(){
         printf("\n0 - Encerrar Programa");
         printf("\n\t");
         printf("\nQual opção deseja selecionar?: ");
+        scanf("%d", &funcionalidade);
 
-        while (scanf("%d", &funcionalidade) != 1)
-        {
-            limpar_buffer();
+        if(funcionalidade < 0){
             printf("\nERRO");
-            printf("\nSomente números são permitidos.");
-            printf("\nQual opção deseja selecionar?: ");
+            printf("\nOpção inválida. Tente selecionar uma funcionalidade novamente.\n");
+            system("pause");
+            continue;
         }
-
 
         if(funcionalidade >= 2 && funcionalidade <= 5){
             if(dados_cadastrados == 0){
@@ -96,15 +89,9 @@ int main(){
                     printf("\n2 - Cadastrar novos dados");
                     printf("\n\t");
                     printf("\nQual opção deseja selecionar?: ");
+                    scanf("%d", &opcao);
 
-                    if(scanf("%d", &opcao) != 1){
-                        limpar_buffer();
-                        printf("\nERRO");
-                        printf("\nSomente números são permitidos.\n");
-                        opcao = -1;
-                    }
-
-                    else if(opcao < 1 || opcao > 2){
+                    if(opcao < 1 || opcao > 2){
                         printf("\nERRO");
                         printf("\nOpção inválida. Selecione um valor válido.\n");
                         system("pause");
@@ -126,15 +113,9 @@ int main(){
                 do{
                     printf("\nO sistema aceita o cadastro de até 20 laboratórios.");
                     printf("\nInsira a quantidade de laboratórios utilizados: ");
+                    scanf("%d", &num_labs);
 
-                    if(scanf("%d", &num_labs) != 1){
-                        limpar_buffer();
-                        printf("\nERRO");
-                        printf("\nSomente números são permitidos.\n");
-                        num_labs = -1;
-                    }
-
-                    else if(num_labs < 1 || num_labs > max_lab){
+                    if(num_labs < 1 || num_labs > max_lab){
                         printf("\nERRO");
                         printf("\nInsira um valor válido.\n");
                     }
@@ -143,15 +124,9 @@ int main(){
                 do{
                     printf("\nO sistema realiza o acompanhamento de registros de até 30 dias.");
                     printf("\nInsira a quantidade de dias: ");
+                    scanf("%d", &dias);
 
-                    if(scanf("%d", &dias) != 1){
-                        limpar_buffer();
-                        printf("\nERRO");
-                        printf("\nSomente números são permitidos.\n");
-                        dias = -1;
-                    }
-
-                    else if(dias < 1 || dias > max_dias){
+                    if(dias < 1 || dias > max_dias){
                         printf("\nERRO");
                         printf("\nInsira um número de dias válido.\n");
                     }
@@ -163,15 +138,9 @@ int main(){
                 for(i = 0; i < num_labs; i++){
                     do{
                         printf("\nInsira a capacidade máxima do Láb. %02d: " , i+ 1);
+                        scanf("%d", &capacidade_labs[i]);
 
-                        if(scanf("%d", &capacidade_labs[i]) != 1){
-                        limpar_buffer();
-                        printf("\nERRO");
-                        printf("\nSomente números são permitidos.\n");
-                        capacidade_labs[i] = -1;
-                        }
-
-                        else if(capacidade_labs[i] <= 0){
+                        if(capacidade_labs[i] <= 0){
                             printf("\nERRO");
                             printf("\nInsira um valor de capacidade maior que 0.\n");
                         }
@@ -187,15 +156,9 @@ int main(){
                     for(j = 0; j < dias; j++){
                         do{
                             printf("\nAlunos presentes no dia %02d: " ,j+1);
+                            scanf("%d", &ocupacao_labs[i][j]);
 
-                            if(scanf("%d", &ocupacao_labs[i][j]) != 1){
-                                limpar_buffer();
-                                printf("\nERRO");
-                                printf("\nSomente números são permitidos.\n");
-                                ocupacao_labs[i][j] = -1;
-                            }
-
-                            else if(ocupacao_labs[i][j] < 0 || ocupacao_labs[i][j] > capacidade_labs[i]){
+                            if(ocupacao_labs[i][j] < 0 || ocupacao_labs[i][j] > capacidade_labs[i]){
                                 printf("\nERRO");
                                 printf("\nOcupação ultrapassou o limite.");
                                 printf("\nInsira o valor novamente.\n");
@@ -224,15 +187,9 @@ int main(){
 
                         do{
                             printf("\nDesempenho Dia %02d: " , j+1);
+                            scanf(" %f", &desempenho_labs[i][j]);
 
-                            if(scanf("%f", &desempenho_labs[i][j]) != 1){
-                                limpar_buffer();
-                                printf("\nERRO");
-                                printf("\nSomente números são permitidos.\n");
-                                desempenho_labs[i][j] = -1;
-                            }
-
-                            else if(desempenho_labs[i][j] < 0.0 || desempenho_labs[i][j] > 10.0){
+                            if(desempenho_labs[i][j] < 0.0 || desempenho_labs[i][j] > 10.0){
                                 printf("\nERRO");
                                 printf("\nValor inválido, o desempenho é medido entre 0 - 10.\n");
                             }
@@ -277,6 +234,7 @@ int main(){
                 printf("\nCalculando indicadores...\n");
                 system("pause");
 
+                //Cálculo total diário e dia de maior movimentação
                 for(i = 0; i < dias; i++){
                     total_diario[i] = 0;
                     for(j = 0; j < num_labs; j++){
@@ -288,12 +246,11 @@ int main(){
                     }
                 }
 
+                //Cálculo da média diária, taxa média de ocupação, maior e menor ocupação
                 for(i = 0; i < num_labs; i++){
                     soma_ocupacao_lab[i] = 0;
-                    soma_desempenho_lab[i] = 0.0;
                     for(j = 0; j < dias; j++){
                         soma_ocupacao_lab[i] += ocupacao_labs[i][j];
-                        soma_desempenho_lab[i] +=desempenho_labs[i][j];
 
                         if(ocupacao_labs[i][j] > maior_ocupacao_dia){
                             maior_ocupacao_dia = ocupacao_labs[i][j];
@@ -306,9 +263,10 @@ int main(){
 
                     media_ocupacao[i] = (float)round((float)soma_ocupacao_lab[i] / dias);
                     taxa_media_diaria[i] = ((float)soma_ocupacao_lab[i] / (capacidade_labs[i] * dias)) * 100;
-                    media_desempenho[i] = soma_desempenho_lab[i]/ dias;
                 }
 
+                //Indicadores individuais que serão apresentados nos relatórios. Somente cálculo da maior e menor ocupação de cada laboratório
+                //Não serão exibidos no case 3
                 for(i = 0; i < num_labs; i++){
                     maior_ocupacao_individual[i] = ocupacao_labs[i][0];
                     dia_maior_individual[i] = 0;
@@ -392,15 +350,9 @@ int main(){
                 do{
                     printf("\nCadastro de dados de 01 a %02d dias" ,dias);
                     printf("\nInsira o dia que deseja consultar: ");
+                    scanf("%d", &consulta_dia);
 
-                    if (scanf("%d", &consulta_dia) != 1){
-                        limpar_buffer();
-                        printf("\nERRO");
-                        printf("\nSomente números são permitidos.\n");
-                        consulta_dia = -1;
-                    }
-
-                    else if(consulta_dia < 1 || consulta_dia > dias){
+                    if(consulta_dia < 1 || consulta_dia > dias){
                         printf("\nERRO");
                         printf("\nInsira um dia válido, já cadastrado no sistema.\n");
                     }
@@ -448,15 +400,9 @@ int main(){
                     printf("\n2 - Relatório geral: contém todas as informações de todos os laboratórios.");
                     printf("\n\t");
                     printf("\nQual opção deseja selecionar?: ");
+                    scanf("%d", &tipo_relatorio);
 
-                    if (scanf("%d", &tipo_relatorio) != 1){
-                        limpar_buffer();
-                        printf("\nERRO");
-                        printf("\nSomente números são permitidos.\n");
-                        tipo_relatorio = -1;
-                    }
-
-                    else if(tipo_relatorio < 1 || tipo_relatorio > 2){
+                    if(tipo_relatorio < 1 || tipo_relatorio > 2){
                         printf("\nERRO");
                         printf("\nOpção inválida. Selecione um valor válido.\n");
                     }
@@ -470,13 +416,7 @@ int main(){
                     do{
                         printf("\nExistem %02d laboratórios cadastrados no sistema." ,num_labs);
                         printf("\nInsira o laboratório que deseja consultar: ");
-
-                        while (scanf("%d", &consulta_lab) != 1){
-                            limpar_buffer();
-                            printf("\nERRO");
-                            printf("\nSomente números são permitidos.\n");
-                            printf("\nQual opção deseja selecionar?: ");
-                        }
+                        scanf("%d", &consulta_lab);
 
                         indice = consulta_lab - 1;
                         if(indice < 0 || indice >= num_labs){
@@ -500,8 +440,7 @@ int main(){
                     printf("\n");
                     printf("\nIndicadores do Láb. %02d\n" , consulta_lab);
                     printf("\n- Média Diária de Ocupação: %.2f alunos" ,media_ocupacao[indice]);
-                    printf("\n- Taxa Média de Ocupação: %.2f%%" , taxa_media_diaria[indice]);
-                    printf("\n- Média de Desempenho: %.2f", media_desempenho[indice]);
+                    printf("\n- Texa Média de Ocupação: %.2f%%" , taxa_media_diaria[indice]);
                     printf("\n- Maior Ocupação: %d alunos" , maior_ocupacao_individual[indice]);
                     printf("\n  Registrada Dia %d" , dia_maior_individual[indice] + 1);
                     printf("\n- Menor Ocupação: %d alunos" , menor_ocupacao_individual[indice]);
@@ -531,7 +470,6 @@ int main(){
                         printf("\n\nIndicadores do Láb. %02d" , i + 1);
                         printf("\n- Média Diária de Ocupação: %.2f alunos" ,media_ocupacao[i]);
                         printf("\n- Taxa Média de Ocupação: %.2f%%" , taxa_media_diaria[i]);
-                        printf("\n- Média Desempenho: %.2f" , media_desempenho[i]);
                         printf("\n- Maior Ocupação: %d alunos" , maior_ocupacao_individual[i]);
                         printf("\n  Registrada Dia %d" , dia_maior_individual[i] + 1);
                         printf("\n- Menor Ocupação: %d alunos" , menor_ocupacao_individual[i]);
