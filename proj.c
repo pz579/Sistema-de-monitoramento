@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <locale.h>
+#include <string.h>
 
 #define max_lab 20
 #define max_dias 30
@@ -43,6 +44,7 @@ int main(){
     int tipo_relatorio;
     int consulta_lab;
     int indice;
+    char classificacao[max_lab];
 
     setlocale(LC_ALL, "portuguese");
 
@@ -429,6 +431,54 @@ int main(){
                 break;
 
             case 5:
+                if(calculo_indicadores == 0){
+                system("cls");
+                printf("\nOs indicadores ainda não foram calculados.");
+                printf("\nPortanto, não é possível apresentar um relatório.");
+                printf("\nPor favor, execute o cálculo dos indicadores, selecionando a funcionalidade 3, para ter acesso aos relatórios.\n");
+                system("pause");
+                break;
+                }
+                printf("\n----Classificação dos laboratorios----\n");
+                for(i =0; i < num_labs; i++){
+                    printf("Laboratorio %d",i+1);
+                    if (taxa_media_diaria[i]>=80)
+                    {
+                       if (media_desempenho[i]>= 7.5)
+                       {
+                            strcpy(classificacao, "alto aproveitamento\0");
+                            printf("\nalto aproveitamento\n");
+
+                       }
+                       else
+                       {
+                           strcpy(classificacao, "atenção ao desempenho\0");
+                           printf("\natenção ao desempenho\n");
+                       }
+                    }
+                    if (taxa_media_diaria[i]<80 && taxa_media_diaria[i]>= 50)
+                    {
+                        if (media_desempenho[i]>= 7.5)
+                        {
+                            strcpy(classificacao, "Ocupação moderada\0");
+                            printf("\nOcupação moderada\n");
+                        }
+                        else
+                        {
+                            strcpy(classificacao, "atenção na ocupação\0");
+                            printf("\natenção na ocupação\n");
+                        }
+                    }
+                    if (taxa_media_diaria[i]<50)
+                    {
+                        strcpy(classificacao, "subutilizado\0");
+                        printf("\nsubutilizado\n");
+                    }
+                    //printf("%s\n",classificacao);
+                }
+                printf("\n");
+                system("pause");
+                break;
             case 6:
                 if(calculo_indicadores == 0){
                     system("cls");
