@@ -44,7 +44,7 @@ int main(){
     int tipo_relatorio;
     int consulta_lab;
     int indice;
-    char classificacao[max_lab];
+    char classificacao[50];
 
     setlocale(LC_ALL, "portuguese");
 
