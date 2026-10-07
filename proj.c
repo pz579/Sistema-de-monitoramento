@@ -43,12 +43,8 @@ int main(){
     int maior_ocupacao_lab;
     int tipo_relatorio;
     int consulta_lab;
-    int indice;
-<<<<<<< HEAD
     int classificacao[max_lab];
-=======
-    char classificacao[50];
->>>>>>> cdf1ef3b83678807be5691f658466759f1193b97
+
 
     setlocale(LC_ALL, "portuguese");
 
@@ -84,7 +80,7 @@ int main(){
         }
 
 
-        if(funcionalidade >= 2 && funcionalidade <= 5){
+        if(funcionalidade >= 2 && funcionalidade <= 4){
             if(dados_cadastrados == 0){
                 system("cls");
                 printf("\nERRO");
@@ -436,52 +432,57 @@ int main(){
 
             case 5:
                 if(calculo_indicadores == 0){
-                system("cls");
-                printf("\nOs indicadores ainda não foram calculados.");
-                printf("\nPortanto, não é possível apresentar um relatório.");
-                printf("\nPor favor, execute o cálculo dos indicadores, selecionando a funcionalidade 3, para ter acesso aos relatórios.\n");
-                system("pause");
-                break;
+                    system("cls");
+                    printf("\nOs indicadores ainda não foram calculados.");
+                    printf("\nPortanto, não é possível apresentar um relatório.");
+                    printf("\nPor favor, execute o cálculo dos indicadores, selecionando a funcionalidade 3, para ter acesso aos relatórios.\n");
+                    system("pause");
+                    break;
+                }
 
-                printf("\n----Classificação dos laboratorios----\n");
+                system("cls");
+                printf("\n---- CLASSIFICAÇÃO DOS LABORATÓRIOS ----\n");
+                printf("\n----------------------------------------------\n");
+
                 for(i =0; i < num_labs; i++){
-                    printf("Laboratorio %d",i+1);
-                    if (taxa_media_diaria[i]>=80)
+                    printf("\nLaboratorio %02d", i+1);
+                    if (taxa_media_diaria[i] >= 80)
                     {
-                       if (media_desempenho[i]>= 7.5)
+                       if (media_desempenho[i] >= 7.5)
                        {
                             classificacao[i] = 1;
-                            printf("\nalto aproveitamento\n");
+                            printf("\nClassificação: Alto Aproveitamento\n");
 
                        }
                        else
                        {
-                            classificacao[i] = 2;
-                           printf("\natenção ao desempenho\n");
+                        classificacao[i] = 2;
+                           printf("\nClassificação: Atenção ao Desempenho\n");
                        }
                     }
-                    if (taxa_media_diaria[i]<80 && taxa_media_diaria[i]>= 50)
+                    if (taxa_media_diaria[i] < 80 && taxa_media_diaria[i]>= 50)
                     {
                         if (media_desempenho[i]>= 7.5)
                         {
                             classificacao[i] = 3;
-                            printf("\nOcupação moderada\n");
+                            printf("\nClassificação: Ocupação Moderada\n");
                         }
                         else
                         {
                             classificacao[i] = 4;
-                            printf("\natenção na ocupação\n");
+                            printf("\nClassificação: Atenção na Ocupação\n");
                         }
                     }
                     if (taxa_media_diaria[i]<50)
                     {
-                            classificacao[i] = 5;
-                        printf("\nsubutilizado\n");
+                        classificacao[i] = 5;
+                        printf("\nClassificação: Subutilizado\n");
                     }
                 }
-                printf("\n");
+                printf("\n----------------------------------------------\n");
                 system("pause");
                 break;
+
             case 6:
                 if(calculo_indicadores == 0){
                     system("cls");
@@ -531,13 +532,12 @@ int main(){
                             printf("\nQual opção deseja selecionar?: ");
                         }
 
-                        indice = consulta_lab - 1;
-                        if(indice < 0 || indice >= num_labs){
+                        if((consulta_lab - 1) < 0 || (consulta_lab - 1) >= num_labs){
                             printf("\nERRO");
                             printf("\nEsse laboratório não está cadastrado no sistema.");
                             printf("\nInsira um valor válido.\n");
                         }
-                    }while(indice < 0 || indice >= num_labs);
+                    }while((consulta_lab - 1) < 0 || (consulta_lab - 1) >= num_labs);
 
                     system("cls");
                     printf("\n--- RELATÓRIO DE UM LABORATÓRIO ---\n");
@@ -545,20 +545,43 @@ int main(){
                     printf("\n----------------------------------------------");
                     printf("\n          RELATÓRIO LABORATÓRIO %02d\n" ,consulta_lab);
                     printf("\n----------------------------------------------");
-                    printf("\nCapacidade Máxima = %d alunos\n", capacidade_labs[indice]);
+                    printf("\nCapacidade Máxima = %d alunos\n", capacidade_labs[consulta_lab - 1]);
                     printf("\nOcupação por Dia:");
                     for(i = 0; i < dias; i++){
-                        printf("\n- Dia %02d: %d alunos" , i + 1, ocupacao_labs[indice][i]);
+                        printf("\n- Dia %02d: %d alunos" , i + 1, ocupacao_labs[consulta_lab - 1][i]);
                     }
                     printf("\n");
                     printf("\nIndicadores do Láb. %02d\n" , consulta_lab);
-                    printf("\n- Média Diária de Ocupação: %.2f alunos" ,media_ocupacao[indice]);
-                    printf("\n- Taxa Média de Ocupação: %.2f%%" , taxa_media_diaria[indice]);
-                    printf("\n- Média de Desempenho: %.2f", media_desempenho[indice]);
-                    printf("\n- Maior Ocupação: %d alunos" , maior_ocupacao_individual[indice]);
-                    printf("\n  Registrada Dia %d" , dia_maior_individual[indice] + 1);
-                    printf("\n- Menor Ocupação: %d alunos" , menor_ocupacao_individual[indice]);
-                    printf("\n  Registrada Dia %d" , dia_menor_individual[indice] + 1);
+                    printf("\n- Média Diária de Ocupação: %.2f alunos" ,media_ocupacao[consulta_lab - 1]);
+                    printf("\n- Taxa Média de Ocupação: %.2f%%" , taxa_media_diaria[consulta_lab - 1]);
+                    printf("\n- Média de Desempenho: %.2f", media_desempenho[consulta_lab - 1]);
+                    printf("\n- Maior Ocupação: %d alunos" , maior_ocupacao_individual[consulta_lab - 1]);
+                    printf("\n  Registrada Dia %d" , dia_maior_individual[consulta_lab - 1] + 1);
+                    printf("\n- Menor Ocupação: %d alunos" , menor_ocupacao_individual[consulta_lab - 1]);
+                    printf("\n  Registrada Dia %d" , dia_menor_individual[consulta_lab - 1] + 1);
+
+                    switch(classificacao[consulta_lab - 1]){
+                        case 1:
+                            printf("\n- Classificação: Alto Aproveitamento\n");
+                            break;
+
+                        case 2:
+                            printf("\n- Classificação: Atenção ao Desempenho\n");
+                            break;
+
+                        case 3:
+                            printf("\n- Classificação: Ocupação Moderada\n");
+                            break;
+
+                        case 4:
+                            printf("\n- Classificação: Atenção na Ocupação\n");
+                            break;
+
+                        case 5:
+                            printf("\n- Classificação: Subutilizado\n");
+                            break;
+                    }
+
                     printf("\n----------------------------------------------\n");
                     system("pause");
                 }
@@ -588,7 +611,29 @@ int main(){
                         printf("\n- Maior Ocupação: %d alunos" , maior_ocupacao_individual[i]);
                         printf("\n  Registrada Dia %d" , dia_maior_individual[i] + 1);
                         printf("\n- Menor Ocupação: %d alunos" , menor_ocupacao_individual[i]);
-                        printf("\n  Registrada Dia %d\n" , dia_menor_individual[i] + 1);
+                        printf("\n  Registrada Dia %d" , dia_menor_individual[i] + 1);
+
+                        switch(classificacao[i]){
+                        case 1:
+                            printf("\n- Classificação: Alto Aproveitamento\n");
+                            break;
+
+                        case 2:
+                            printf("\n- Classificação: Atenção ao Desempenho\n");
+                            break;
+
+                        case 3:
+                            printf("\n- Classificação: Ocupação Moderada\n");
+                            break;
+
+                        case 4:
+                            printf("\n- Classificação: Atenção na Ocupação\n");
+                            break;
+
+                        case 5:
+                            printf("\n- Classificação: Subutilizado\n");
+                            break;
+                        }
                     }
                     printf("\n----------------------------------------------\n");
                     system("pause");
@@ -604,7 +649,7 @@ int main(){
                 system("pause");
 
         }
-        }
+
     }while(funcionalidade !=0);
 
     return 0;
