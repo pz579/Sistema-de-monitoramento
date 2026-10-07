@@ -44,7 +44,11 @@ int main(){
     int tipo_relatorio;
     int consulta_lab;
     int indice;
+<<<<<<< HEAD
     int classificacao[max_lab];
+=======
+    char classificacao[50];
+>>>>>>> cdf1ef3b83678807be5691f658466759f1193b97
 
     setlocale(LC_ALL, "portuguese");
 
