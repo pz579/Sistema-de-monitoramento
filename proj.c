@@ -44,7 +44,7 @@ int main(){
     int tipo_relatorio;
     int consulta_lab;
     int indice;
-    char classificacao[max_lab];
+    int classificacao[max_lab];
 
     setlocale(LC_ALL, "portuguese");
 
@@ -438,7 +438,7 @@ int main(){
                 printf("\nPor favor, execute o cálculo dos indicadores, selecionando a funcionalidade 3, para ter acesso aos relatórios.\n");
                 system("pause");
                 break;
-                }
+
                 printf("\n----Classificação dos laboratorios----\n");
                 for(i =0; i < num_labs; i++){
                     printf("Laboratorio %d",i+1);
@@ -446,13 +446,13 @@ int main(){
                     {
                        if (media_desempenho[i]>= 7.5)
                        {
-                            strcpy(classificacao, "alto aproveitamento\0");
+                            classificacao[i] = 1;
                             printf("\nalto aproveitamento\n");
 
                        }
                        else
                        {
-                           strcpy(classificacao, "atenção ao desempenho\0");
+                            classificacao[i] = 2;
                            printf("\natenção ao desempenho\n");
                        }
                     }
@@ -460,21 +460,20 @@ int main(){
                     {
                         if (media_desempenho[i]>= 7.5)
                         {
-                            strcpy(classificacao, "Ocupação moderada\0");
+                            classificacao[i] = 3;
                             printf("\nOcupação moderada\n");
                         }
                         else
                         {
-                            strcpy(classificacao, "atenção na ocupação\0");
+                            classificacao[i] = 4;
                             printf("\natenção na ocupação\n");
                         }
                     }
                     if (taxa_media_diaria[i]<50)
                     {
-                        strcpy(classificacao, "subutilizado\0");
+                            classificacao[i] = 5;
                         printf("\nsubutilizado\n");
                     }
-                    //printf("%s\n",classificacao);
                 }
                 printf("\n");
                 system("pause");
@@ -601,7 +600,7 @@ int main(){
                 system("pause");
 
         }
-
+        }
     }while(funcionalidade !=0);
 
     return 0;
