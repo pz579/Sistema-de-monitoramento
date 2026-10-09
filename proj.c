@@ -41,6 +41,7 @@ int main(){
     int consulta_dia;
     int lab_mais_ocupado = 0;
     int maior_ocupacao_lab;
+    int lab_classificado = 0;
     int tipo_relatorio;
     int consulta_lab;
     int classificacao[max_lab];
@@ -481,14 +482,16 @@ int main(){
                 }
                 printf("\n----------------------------------------------\n");
                 system("pause");
+
+                lab_classificado = 1;
                 break;
 
             case 6:
-                if(calculo_indicadores == 0){
+                if(lab_classificado == 0){
                     system("cls");
-                    printf("\nOs indicadores ainda não foram calculados.");
+                    printf("\nOs laboratórios ainda não foram classificados.");
                     printf("\nPortanto, não é possível apresentar um relatório.");
-                    printf("\nPor favor, execute o cálculo dos indicadores, selecionando a funcionalidade 3, para ter acesso aos relatórios.\n");
+                    printf("\nPor favor, execute a classificação dos laboratórios, selecionando a funcionalidade 5, para ter acesso aos relatórios.\n");
                     system("pause");
                     break;
                 }
@@ -532,12 +535,12 @@ int main(){
                             printf("\nQual opção deseja selecionar?: ");
                         }
 
-                        if((consulta_lab - 1) < 0 || (consulta_lab - 1) >= num_labs){
+                        if(consulta_lab  < 1 || consulta_lab > num_labs){
                             printf("\nERRO");
                             printf("\nEsse laboratório não está cadastrado no sistema.");
                             printf("\nInsira um valor válido.\n");
                         }
-                    }while((consulta_lab - 1) < 0 || (consulta_lab - 1) >= num_labs);
+                    }while(consulta_lab < 1 || consulta_lab > num_labs);
 
                     system("cls");
                     printf("\n--- RELATÓRIO DE UM LABORATÓRIO ---\n");
