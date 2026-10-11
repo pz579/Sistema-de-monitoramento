@@ -25,11 +25,11 @@ int main(){
     int dados_cadastrados = 0;
     int i, j;
     int total_diario[max_dias];
-    int maior_movimentacao = -1;
+    int maior_movimentacao;
     int soma_ocupacao_lab[max_lab];
     float soma_desempenho_lab[max_lab];
-    int maior_ocupacao_dia = -1;
-    int menor_ocupacao_dia = 99999999;
+    int maior_ocupacao_dia;
+    int menor_ocupacao_dia;
     float taxa_media_diaria[max_lab];
     float media_ocupacao[max_lab];
     float media_desempenho[max_lab];
@@ -280,6 +280,9 @@ int main(){
                 printf("\nCalculando indicadores...\n");
                 system("pause");
 
+
+                maior_movimentacao = -1;
+
                 for(i = 0; i < dias; i++){
                     total_diario[i] = 0;
                     for(j = 0; j < num_labs; j++){
@@ -290,6 +293,9 @@ int main(){
                         maior_movimentacao = total_diario[i];
                     }
                 }
+
+                maior_ocupacao_dia = ocupacao_labs[0][0];
+                menor_ocupacao_dia = ocupacao_labs[0][0];
 
                 for(i = 0; i < num_labs; i++){
                     soma_ocupacao_lab[i] = 0;
