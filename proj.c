@@ -28,8 +28,8 @@ int main(){
     int maior_movimentacao;
     int soma_ocupacao_lab[max_lab];
     float soma_desempenho_lab[max_lab];
-    int maior_ocupacao_dia;
-    int menor_ocupacao_dia;
+    int maior_ocupacao_geral;
+    int menor_ocupacao_geral;
     float taxa_media_diaria[max_lab];
     float media_ocupacao[max_lab];
     float media_desempenho[max_lab];
@@ -39,8 +39,7 @@ int main(){
     int menor_ocupacao_individual[max_lab];
     int calculo_indicadores = 0;
     int consulta_dia;
-    int lab_mais_ocupado = 0;
-    int maior_ocupacao_lab;
+    int lab_mais_ocupado;
     int lab_classificado = 0;
     int tipo_relatorio;
     int consulta_lab;
@@ -213,7 +212,7 @@ int main(){
                 printf("\n--- CADASTRO DESEMPENHO ---\n");
                 printf("\n----------------------------------------------\n");
                 printf("\nEscala de desempenho medida no intervalo de 0 a 10.");
-                printf("\nVAlores reais podem ser inseridos no sistema.\n");
+                printf("\nValores reais podem ser inseridos no sistema.\n");
                 printf("\n----------------------------------------------\n");
                 for(i = 0; i < num_labs; i++){
                     printf("\nLaboratório %02d" , i+1);
@@ -222,6 +221,7 @@ int main(){
                         if(ocupacao_labs[i][j] == 0){
                             printf("\nDesempenho Dia %02d: 0.0", j+1);
                             printf("\nDefinição automática para dias com ocupação 0.\n");
+                            desempenho_labs[i][j] = 0.0;
                             continue;
                         }
 
@@ -294,8 +294,8 @@ int main(){
                     }
                 }
 
-                maior_ocupacao_dia = ocupacao_labs[0][0];
-                menor_ocupacao_dia = ocupacao_labs[0][0];
+                maior_ocupacao_geral = ocupacao_labs[0][0];
+                menor_ocupacao_geral = ocupacao_labs[0][0];
 
                 for(i = 0; i < num_labs; i++){
                     soma_ocupacao_lab[i] = 0;
@@ -304,12 +304,12 @@ int main(){
                         soma_ocupacao_lab[i] += ocupacao_labs[i][j];
                         soma_desempenho_lab[i] +=desempenho_labs[i][j];
 
-                        if(ocupacao_labs[i][j] > maior_ocupacao_dia){
-                            maior_ocupacao_dia = ocupacao_labs[i][j];
+                        if(ocupacao_labs[i][j] > maior_ocupacao_geral){
+                            maior_ocupacao_geral = ocupacao_labs[i][j];
                         }
 
-                        if(ocupacao_labs[i][j] < menor_ocupacao_dia){
-                            menor_ocupacao_dia = ocupacao_labs[i][j];
+                        if(ocupacao_labs[i][j] < menor_ocupacao_geral){
+                            menor_ocupacao_geral = ocupacao_labs[i][j];
                         }
                     }
 
@@ -364,11 +364,11 @@ int main(){
 
                 printf("\n----------------------------------------------\n");
                 printf("\n--- MAIOR OCUPAÇÃO ---\n");
-                printf("\nMaior ocupação registrada: %d alunos" , maior_ocupacao_dia);
+                printf("\nMaior ocupação registrada: %d alunos" , maior_ocupacao_geral);
                 printf("\nResgistrada em: \n");
                 for(i = 0; i < num_labs; i++){
                     for(j = 0; j < dias; j++){
-                        if(ocupacao_labs[i][j] == maior_ocupacao_dia){
+                        if(ocupacao_labs[i][j] == maior_ocupacao_geral){
                         printf("\n- Laboratório %02d", i + 1);
                         printf("\n  Dia %02d\n", j + 1);
                         }
@@ -377,11 +377,11 @@ int main(){
 
                 printf("\n----------------------------------------------\n");
                 printf("\n--- MENOR OCUPAÇÃO ---\n");
-                printf("\nMenor ocupação registrada: %d alunos" , menor_ocupacao_dia);
+                printf("\nMenor ocupação registrada: %d alunos" , menor_ocupacao_geral);
                 printf("\nResgistrada em: \n");
                 for(i = 0; i < num_labs; i++){
                     for(j = 0; j < dias; j++){
-                        if(ocupacao_labs[i][j] == menor_ocupacao_dia){
+                        if(ocupacao_labs[i][j] == menor_ocupacao_geral){
                             printf("\n- Laboratório %02d", i + 1);
                             printf("\n  Dia %02d\n", j + 1);
                         }
@@ -415,21 +415,20 @@ int main(){
                     }
                 }while(consulta_dia < 1 || consulta_dia > dias);
 
-                maior_ocupacao_lab = ocupacao_labs[0][consulta_dia - 1];
+                lab_mais_ocupado = ocupacao_labs[0][consulta_dia - 1];
                 for(i = 1; i < num_labs; i++){
-                    if(ocupacao_labs[i][consulta_dia - 1] > maior_ocupacao_lab){
-                        maior_ocupacao_lab = ocupacao_labs[i][consulta_dia - 1];
-                        lab_mais_ocupado = i;
+                    if(ocupacao_labs[i][consulta_dia - 1] > lab_mais_ocupado){
+                        lab_mais_ocupado = ocupacao_labs[i][consulta_dia - 1];
                     }
                 }
 
                 system("cls");
                 printf("\n---- LABORATÓRIO MAIS OCUPADO ----\n");
                 printf("\n----------------------------------------------\n");
-                printf("\nNo dia %02d, a maior ocupação registrada foi: %02d" , consulta_dia, maior_ocupacao_lab);
+                printf("\nNo dia %02d, a maior ocupação registrada foi: %02d" , consulta_dia, lab_mais_ocupado);
                 printf("\nLaboratório(s) mais ocupado(s): \n");
                 for(i =0; i < num_labs; i++){
-                  if(ocupacao_labs[i][consulta_dia - 1] == maior_ocupacao_lab){
+                  if(ocupacao_labs[i][consulta_dia - 1] == lab_mais_ocupado){
                       printf("\n- Láb. %02d" , i+1);
                   }
                 }
@@ -467,9 +466,9 @@ int main(){
                            printf("\nClassificação: Atenção ao Desempenho\n");
                        }
                     }
-                    if (taxa_media_diaria[i] < 80 && taxa_media_diaria[i]>= 50)
+                    if (taxa_media_diaria[i] < 80 && taxa_media_diaria[i] >= 50)
                     {
-                        if (media_desempenho[i]>= 7.5)
+                        if (media_desempenho[i] >= 7.5)
                         {
                             classificacao[i] = 3;
                             printf("\nClassificação: Ocupação Moderada\n");
@@ -480,7 +479,7 @@ int main(){
                             printf("\nClassificação: Atenção na Ocupação\n");
                         }
                     }
-                    if (taxa_media_diaria[i]<50)
+                    if (taxa_media_diaria[i] < 50)
                     {
                         classificacao[i] = 5;
                         printf("\nClassificação: Subutilizado\n");
